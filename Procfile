@@ -1,1 +1,1 @@
-Dasha: python -m Kidsbot
+Dasha: python -m Dasha
