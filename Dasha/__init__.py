@@ -26,4 +26,4 @@ if ENV:
     API_KEY = os.environ.get("API_KEY", None)
     API_HASH = os.environ.get("API_HASH", None)
 
-kid = TelegramClient('kid', APP_ID, API_HASH).start(bot_token=BOT_TOKEN)
+kid = TelegramClient('kid', API_ID, API_HASH).start(bot_token=BOT_TOKEN)
