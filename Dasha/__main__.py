@@ -1,16 +1,21 @@
-from sys import argv, exit
-from Dasha import kid
-from Dasha import BOT_TOKEN
+import glob
+from pathlib import Path
+from TelethonBot.utils import load_plugins
+import logging
+from . import kid
 
-import Dasha.events
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
 
-try:
-    kid.start(bot_token=BOT_TOKEN)
-except Exception:
-    print("Bot Token Invalid")
-    exit(1)
+path = "Dasha/modules*.py"
+files = glob.glob(path)
+for name in files:
+    with open(name) as a:
+        patt = Path(a.name)
+        plugin_name = patt.stem
+        load_plugins(plugin_name.replace(".py", ""))
 
-if len(argv) not in (1, 3, 4):
-    kid.disconnect()
-else:
+print("Successfully deployed!")
+
+if __name__ == "__main__":
     kid.run_until_disconnected()
