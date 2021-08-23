@@ -1,4 +1,4 @@
-rom sys import argv, exit
+from sys import argv, exit
 from Dasha import kid
 from Dasha import BOT_TOKEN
 
