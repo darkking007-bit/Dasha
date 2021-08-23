@@ -23,7 +23,7 @@ ENV = bool(os.environ.get("ENV", True))
 
 if ENV:
     BOT_TOKEN = os.environ.get("BOT_TOKEN", None)
-    API_KEY = os.environ.get("API_KEY", None)
+    API_ID = os.environ.get("API_ID", None)
     API_HASH = os.environ.get("API_HASH", None)
 
 kid = TelegramClient('kid', API_ID, API_HASH).start(bot_token=BOT_TOKEN)
