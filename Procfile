@@ -1,1 +1,1 @@
-worker: python -m Dasha
+web: python -m Dasha
