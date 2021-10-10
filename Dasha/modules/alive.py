@@ -2,6 +2,7 @@ from Dasha.events import dasha
 from Dasha import StartTime
 import time, datetime
 from . import get_readable_time
+from telethon import Button
 
 @dasha(pattern="^/ping")
 async def _(event):
@@ -16,6 +17,10 @@ async def _(event):
         "<b>Uptime -</b> <code>{}</code>".format(telegram_ping, uptime),
         parse_mode="html",
     )
+       
+@dasha(pattern="^/repo$")
+async def repo(event):
+      await event.client.send_message(event.chat_id, '**Rᴇᴘᴏ**', buttons=[Button.url('Click', 'http://github.com/tamilvip007/dasha')])
 
 @dasha(pattern="^/alive$")
 async def alive(event):
