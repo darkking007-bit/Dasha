@@ -1,5 +1,5 @@
 from Dasha import ubot, tbot
-from Dasha.events import Wbot
+from Dasha.events import dasha
 from . import get_user
 
 @dasha(pattern="^/kick ?(.*)")
