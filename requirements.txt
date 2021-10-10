@@ -1,2 +1,8 @@
 telethon
-python-decouple
+pytgcalls==3.0.0.dev19
+sqlalchemy==1.3.23
+psycopg2-binary
+pytz
+gitpython
+heroku3
+psutil
