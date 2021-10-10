@@ -20,7 +20,7 @@ async def _(event):
        
 @dasha(pattern="^/repo$")
 async def repo(event):
-      await event.client.send_message(event.chat_id, '**Rᴇᴘᴏ**', buttons=[Button.url('Click', 'http://github.com/tamilvip007/dasha')])
+      await event.client.send_message(event.chat_id, '**[Rᴇᴘᴏ](http://github.com/tamilvip007/dasha)**')
 
 @dasha(pattern="^/alive$")
 async def alive(event):
