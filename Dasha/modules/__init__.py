@@ -1,5 +1,5 @@
 import time
-from dasha import ubot
+from Dasha import ubot
 
 def get_readable_time(seconds: int) -> str:
     count = 0
