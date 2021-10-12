@@ -1,6 +1,6 @@
 from Dasha.events import dasha
 
-UPSTREAM_REPO_URL = "https://github.com/tamilvip007/Dasha"
+UPSTREAM_REPO_URL = "https://github.com/TAMILVIP007/Dasha"
 from os import remove, execle, path, environ
 import asyncio
 import sys
@@ -42,15 +42,15 @@ async def _(ups):
     off_repo = UPSTREAM_REPO_URL
     force_update = False
     try:
-        txt = "Oops.. Updater cannot continue "
+        txt = "`Oops.. Updater cannot continue "
         repo = Repo()
     except NoSuchPathError as error:
-        await lol.edit(f"{txt}\ndirectory {error} is not found")
-        repo.del()
+        await lol.edit(f"{txt}\n`directory {error} is not found`")
+        repo.__del__()
         return
     except GitCommandError as error:
-        await lol.edit(f"{txt}\nEarly failure! {error}")
-        repo.del()
+        await lol.edit(f"{txt}\n`Early failure! {error}`")
+        repo.__del__()
         return
     except InvalidGitRepositoryError as error:
         if conf != "now":
@@ -66,12 +66,12 @@ async def _(ups):
     ac_br = repo.active_branch.name
     if ac_br != "master":
         await lol.edit(
-            f"[UPDATER]: Looks like you are using your own custom branch ({ac_br}). "
+            f"**[UPDATER]:**` Looks like you are using your own custom branch ({ac_br}). "
             "in that case, Updater is unable to identify "
             "which branch is to be merged. "
-            "please checkout to any official branch"
+            "please checkout to any official branch`"
         )
-        repo.del()
+        repo.__del__()
         return
 
     try:
@@ -85,16 +85,16 @@ async def _(ups):
     changelog = await gen_chlog(repo, f"HEAD..upstream/{ac_br}")
 
     if not changelog and not force_update:
-        await lol.edit("\nYour bot is **up-to-date**")
-        repo.del()
+        await lol.edit("\n`Your bot is` **up-to-date**")
+        repo.__del__()
         return
 
     if conf != "now" and not force_update:
         changelog_str = (
-            f"New UPDATE available for {ac_br}\n\nCHANGELOG:\n{changelog}"
+            f"**New UPDATE available for {ac_br}\n\nCHANGELOG:**\n`{changelog}`"
         )
         if len(changelog_str) > 4096:
-            await lol.edit("Changelog is too big, view the file to see it.")
+            await lol.edit("`Changelog is too big, view the file to see it.`")
             file = open("output.txt", "w+")
             file.write(changelog_str)
             file.close()
@@ -105,7 +105,7 @@ async def _(ups):
             )
             remove("output.txt")
         else:
-            await lol.edit(changelog_str + "\n" + "do /update now to update")
+            await lol.edit(changelog_str + "\n" + "**do** `/update now` **to update**")
 
         return
 
@@ -118,7 +118,7 @@ async def _(ups):
     except GitCommandError:
             repo.git.reset("--hard", "FETCH_HEAD")
     reqs_upgrade = await updateme_requirements()
-    await lol.edit("Successfully Updated!\n" "`restarting.`")
+    await lol.edit("Successfully Updated!\n" "restarting.")
     args = [sys.executable, "-m", "Dasha"]
     execle(sys.executable, *args, environ)
-    return`
+    return
