@@ -52,4 +52,23 @@ async def _t(event):
  c_id = str(chat_id).replace('-100', '')
  if event.reply_to_msg_id:
     event_id = event.reply_to_msg_id
- text = f"**[Chat ID]**(http://t.me/{event.chat.username}) : 
+ text = f"**[Chat ID]**(http://t.me/{event.chat.username}) : `{chat_id}`\n"
+ text += f"**[Message ID]**(http://t.me/c/{c_id}/{event_id}) : `{event_id}`\n"
+ text += f"**[User ID]**(tg://user?id={user_id}) : `{user_id}`"
+ if event.reply_to_msg_id:
+  msg = await event.get_reply_message()
+  if msg.sticker:
+    type = "Sticker"
+  elif msg.audio:
+    type = "Audio"
+  elif msg.gif:
+    type = "Gif"
+  elif msg.video:
+    type = "Video"
+  elif msg.media:
+    type = "Media"
+  if msg.media:
+    file_id = msg.file.id
+    text += f"\n\n**Media Type:** `{type}`\n"
+    text += f"**Fid:** `{file_id}`"
+ await event.edit(text)
