@@ -1,5 +1,5 @@
 from Dasha.events import dasha
-from Dasha import ubot, tbot
+from Dashs import ubot, tbot
 import subprocess, asyncio, traceback, io, sys, os, time
 import requests
 
@@ -19,9 +19,9 @@ async def ebent(event):
     curruser = ""
     uid = os.geteuid()
     if uid == 0:
-        cresult = f"{curruser}:~# {cmd}\n{result}"
+        cresult = f"`{curruser}:~#` `{cmd}`\n`{result}`"
     else:
-        cresult = f"{curruser}:~$ {cmd}\n{result}"
+        cresult = f"`{curruser}:~$` `{cmd}`\n`{result}`"
     await catevent.edit(cresult)
     
     
@@ -32,7 +32,7 @@ async def ubot(event):
     cmd = "".join(event.message.message.split(maxsplit=1)[1:])
     if not cmd:
         return
-    catevent= await event.edit("Running ...")
+    catevent= await event.edit("`Running ...`")
     old_stderr = sys.stderr
     old_stdout = sys.stdout
     redirected_output = sys.stdout = io.StringIO()
@@ -55,7 +55,7 @@ async def ubot(event):
         evaluation = stdout
     else:
         evaluation = "Success"
-    final_output = f"**•  Eval : **\n{cmd} \n\n**•  Result : **\n{evaluation} \n"
+    final_output = f"**•  Eval : **\n`{cmd}` \n\n**•  Result : **\n`{evaluation}` \n"
     MAX_MESSAGE_SIZE_LIMIT = 4095
     if len(final_output) > MAX_MESSAGE_SIZE_LIMIT:
         with io.BytesIO(str.encode(final_output)) as out_file:
@@ -84,44 +84,3 @@ async def aexec(code, smessatatus):
     )
     return await locals()["__aexec"](message, reply, ubot, p)
 
-
-@dasha(pattern="^/go ?(.*)")
-async def go(event):
- args = event.pattern_match.group(1)
- await event.edit("`Excecuting...`")
- data = {
-        "code": args,
-        "lang": 'go',
-        "token": "5b5f0ad8-705a-4118-87d4-c0ca29939aed",
-    }
- 
- r = requests.post("https://starkapis.herokuapp.com/compiler", data=data).json()
- if r.get("reason") != None:
-        result = f"""**Code:** \n{reply_code} 
-**Result:** 
-{r.get("results")}
-**Error:** 
-{r.get("errors")}
-**Stats:**
- {r.get("stats")}
-**Success:** 
- {r.get("success")}
-**Warnings:** 
- {r.get("warnings")}
-**Reason:**
- {r.get("reason")}
- """
- else:
-        result = f"""**Code:** \n{reply_code} 
-**Result:** 
-{r.get("results")}
-**Error:** 
-{r.get("errors")}
-**Stats:**
- {r.get("stats")}
-**Success:** 
- {r.get("success")}
-**Warnings:** 
- {r.get("warnings")}
- """
- await event.edit(result)
