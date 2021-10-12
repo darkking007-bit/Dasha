@@ -1,5 +1,5 @@
 from Dasha.events import dasha
-from Dashs import ubot, tbot
+from Dasha import ubot, tbot
 import subprocess, asyncio, traceback, io, sys, os, time
 import requests
 
