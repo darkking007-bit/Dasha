@@ -26,7 +26,7 @@ def load_module(shortname):
         pass
     elif shortname.endswith("_"):
         import importlib
-        import Dasha.events
+        import Wylie.events
 
         path = Path(f"Dasha/modules/{shortname}.py")
         name = "Dasha.modules.{}".format(shortname)
@@ -36,7 +36,7 @@ def load_module(shortname):
         print("Successfully imported " + shortname)
     else:
         import importlib
-        import Dasha.events
+        import Wylie.events
 
         path = Path(f"Dasha/modules/{shortname}.py")
         name = "Dasha.modules.{}".format(shortname)
@@ -56,4 +56,4 @@ for name in files:
     with open(name) as f:
         path1 = Path(f.name)
         shortname = path1.stem
-        load_module(shortname.replace(".py", ""))
+        load_module(shortname.replace(".py", "")) 
